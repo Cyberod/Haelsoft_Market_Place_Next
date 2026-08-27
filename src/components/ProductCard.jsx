@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { isMigrated } from '@/lib/routes';
+import SmartLink from './SmartLink';
 
 const TYPE_STYLES = {
   pdf:   { label: 'PDF',   bg: 'bg-red-50',    text: 'text-red-500' },
@@ -11,13 +10,6 @@ const TYPE_STYLES = {
 };
 
 
-// Detail routes are still served by the legacy SPA, so links to them must be a
-// real browser navigation until those pages migrate.
-function Href({ to, className, children }) {
-  return isMigrated(to)
-    ? <Link href={to} className={className}>{children}</Link>
-    : <a href={to} className={className}>{children}</a>;
-}
 
 function getInitials(name = '') {
   return name
@@ -35,8 +27,8 @@ export default function ProductCard({ product }) {
   const initials = getInitials(product.seller_name);
 
   return (
-    <Href
-      to={`/marketplace/product/${product.slug}`}
+    <SmartLink
+      href={`/marketplace/product/${product.slug}`}
       className="group bg-white rounded-2xl border border-grey overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col"
     >
       {/* Thumbnail */}
@@ -100,6 +92,6 @@ export default function ProductCard({ product }) {
           )}
         </div>
       </div>
-    </Href>
+    </SmartLink>
   );
 }

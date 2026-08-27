@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { isMigrated } from '@/lib/routes';
+import SmartLink from './SmartLink';
 
 const DIFFICULTY_STYLES = {
   beginner:     { label: 'Beginner',     bg: 'bg-green-50',  text: 'text-green-600'  },
@@ -8,13 +7,6 @@ const DIFFICULTY_STYLES = {
 };
 
 
-// Detail routes are still served by the legacy SPA, so links to them must be a
-// real browser navigation until those pages migrate.
-function Href({ to, className, children }) {
-  return isMigrated(to)
-    ? <Link href={to} className={className}>{children}</Link>
-    : <a href={to} className={className}>{children}</a>;
-}
 
 function getInitials(name = '') {
   return name.trim().split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
@@ -26,8 +18,8 @@ export default function CourseCard({ course }) {
   const initials   = getInitials(course.instructor_name);
 
   return (
-    <Href
-      to={`/courses/${course.slug}`}
+    <SmartLink
+      href={`/courses/${course.slug}`}
       className="group bg-white rounded-2xl border border-grey overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col"
     >
       {/* Thumbnail */}
@@ -103,6 +95,6 @@ export default function CourseCard({ course }) {
           )}
         </div>
       </div>
-    </Href>
+    </SmartLink>
   );
 }

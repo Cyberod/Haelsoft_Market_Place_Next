@@ -143,6 +143,23 @@ export async function getProductDetail(slug) {
   return data.product ?? data;
 }
 
+/**
+ * /marketplace/<slug>/ returns exactly the same 16 fields, with the same
+ * values, as that product's entry in /marketplace/ — verified against the live
+ * API. Reading from the cached list therefore costs nothing in fidelity and
+ * turns "one upstream request per product page" into one request for all of
+ * them, which matters both at build time and for a free-tier backend.
+ *
+ * Falls back to the detail endpoint for anything the list omits (it only
+ * returns status=available), so unlisted-but-real slugs still resolve.
+ */
+export async function getProductBySlug(slug) {
+  const { products } = await getMarketplaceProducts();
+  const found = products.find((p) => p.slug === slug);
+  if (found) return found;
+  return getProductDetail(slug);
+}
+
 /* ── Instructors ─────────────────────────────────────────────────────────── */
 
 // Note: this endpoint returns a bare array, unlike every other public endpoint,
