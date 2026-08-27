@@ -1,0 +1,165 @@
+/* ---------------------------------------------------------------------------
+ * Ported from the Vite app's src/index.css (348 lines) during the Next.js
+ * migration. Two deliberate changes:
+ *
+ *  1. The Google Fonts @import is gone — Inter is now self-hosted via next/font
+ *     in layout.js. The `font-inter` utility is preserved (64 usages) and is
+ *     wired to next/font's CSS variable in the `@theme inline` block below.
+ *
+ *  2. Rules with zero JSX references anywhere in the source were dropped:
+ *     the logo scroller (.wrapper/.item1-8), the footer scroller
+ *     (.footer-scroller-*) and .scrollbar-soft — ~90 lines of dead CSS.
+ *     .confetti-piece was also dropped: its only consumer is CoursePlayer,
+ *     which stays on the legacy SPA.
+ * ------------------------------------------------------------------------- */
+
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* next/font sets --font-inter-sans on <html>; this maps it onto the
+   `font-inter` utility the existing markup already uses. */
+@theme inline {
+  --font-inter: var(--font-inter-sans), sans-serif;
+}
+
+@theme {
+  --breakpoint-3xl: 120rem;
+
+  --color-haelsoft-primary: #F15F27;   /* 36% from the bottom of Get started button */
+  --color-haelsoft-secondary: #FFA684; /* 100% whole body of Get started button */
+  --color-white: #FFFFFF;
+  --color-inactive: #848484;
+  --color-active: #000;
+  --color-grey: #EDEDED;
+  --color-section-text: #79617C;
+  --color-section-text-bg: #FEF7FF;
+
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+
+  --spacing-4\.5: 1.125rem;
+  --spacing-10\.5: 2.625rem;
+  --spacing-18\.75: 4.6875rem;
+  --spacing-25\.5: 6.375rem;
+  --spacing-45: 11.25rem;
+  --spacing-58\.5: 14.625rem;
+  --spacing-82: 20.5rem;
+
+  --spacing-3\.20: 0.8rem;
+  --spacing-3\.25: 0.8125rem;
+  --spacing-6\.25: 1.5625rem;
+  --spacing-9: 2.25rem;
+  --spacing-11: 2.75rem;
+  --spacing-15: 3.75rem;
+  --spacing-15\.5: 3.875rem;
+  --spacing-17\.5: 4.375rem;
+  --spacing-20\.25: 5.0625rem;
+  --spacing-22\.5: 5.625rem;
+  --spacing-25: 6.25rem;
+  --spacing-100: 25rem;
+  --spacing-125: 31.25rem;
+
+  --leading-11: 2.75rem;
+  --leading-17\.5: 4.375rem;
+}
+
+@layer components {
+  .frame {
+    @apply mx-auto px-4 xs:px-4 sm:px-5 md:px-10.5 lg:px-18.75;
+  }
+}
+
+@layer utilities {
+  @keyframes scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .animate-scroll {
+    animation: scroll 25s linear infinite;
+  }
+}
+
+/* Payment Partners Carousel */
+@keyframes carouselScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(calc(-177px * 25)); }
+}
+
+@media (max-width: 640px) {
+  @keyframes carouselScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(calc(-100px * 30)); }
+  }
+}
+
+.carousel-track {
+  display: flex;
+  animation: carouselScroll 90s linear infinite;
+  gap: 2rem;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+.carousel-item {
+  flex-shrink: 0;
+  width: 177px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .carousel-track {
+    gap: 1rem;
+    animation: carouselScroll 16s linear infinite;
+  }
+
+  .carousel-item {
+    width: 140px;
+  }
+}
+
+/* Payment Line with Dots */
+.payment-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: rgb(209, 213, 219);
+  position: relative;
+}
+
+.payment-line::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: rgb(132, 132, 132);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.flex > .payment-line:first-child::after { right: -4px; }
+.flex > .payment-line:last-child::after  { left: -4px; }
+
+/* Footer Divider */
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(44, 36, 36, 0.1);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
