@@ -49,6 +49,35 @@ export class ApiError extends Error {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+/**
+ * Cap concurrent upstream requests.
+ *
+ * Prerendering fans out hard - 16 course pages, each calling generateMetadata
+ * and then the page - and a free-tier Render dyno starts refusing connections
+ * well before Next stops asking. Unlike products and instructors, course pages
+ * cannot be served from a list response (it carries no sections or
+ * description), so the requests are genuinely needed; they just must not all
+ * arrive at once. Next builds across several worker processes, so this bounds
+ * each worker rather than the whole build, which is enough in practice.
+ */
+const MAX_CONCURRENT = 2;
+let active = 0;
+const waiting = [];
+
+async function withLimit(fn) {
+  if (active >= MAX_CONCURRENT) {
+    await new Promise((resolve) => waiting.push(resolve));
+  }
+  active++;
+  try {
+    return await fn();
+  } finally {
+    active--;
+    const next = waiting.shift();
+    if (next) next();
+  }
+}
+
 async function fetchWithRetry(url, init) {
   let lastErr;
   for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
@@ -85,9 +114,11 @@ async function fetchWithRetry(url, init) {
 }
 
 function get(endpoint, { revalidate = REVALIDATE.listing, tags } = {}) {
-  return fetchWithRetry(`${API_BASE_URL}${endpoint}`, {
-    next: { revalidate, ...(tags && { tags }) },
-  });
+  return withLimit(() =>
+    fetchWithRetry(`${API_BASE_URL}${endpoint}`, {
+      next: { revalidate, ...(tags && { tags }) },
+    }),
+  );
 }
 
 function qs(params = {}) {
