@@ -1,6 +1,8 @@
-// Temporary theme verification harness for Step 1.1.
-// Exercises every category of ported token so the compiled CSS can be asserted
-// against. Replaced by the real Home page in Step 4.5.
+// Temporary theme verification harness (Step 1.1), kept at /theme-check so it
+// no longer shadows "/" — with no page at the root, "/" now falls through to
+// the legacy SPA via the fallback rewrite. Delete before the Phase 6 cutover.
+export const metadata = { robots: { index: false, follow: false } };
+
 export default function ThemeCheck() {
   return (
     <main className="frame font-inter py-15">
