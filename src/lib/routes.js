@@ -17,6 +17,7 @@ export const MIGRATED_ROUTES = [
   '/contact',        // Step 3.4
   '/marketplace',    // Step 4.1
   '/courses',        // Step 4.3
+  '/in',             // Step 4.4
   // '/',            // Step 4.5
 ];
 

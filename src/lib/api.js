@@ -175,3 +175,19 @@ export async function getInstructorProfile(idOrSlug) {
   const data = await get(`/instructors/${idOrSlug}/`, { revalidate: REVALIDATE.detail });
   return data.instructor ?? data;
 }
+
+/**
+ * Same trick as getProductBySlug: /instructors/featured/ returns each
+ * instructor's complete profile - all 10 fields, identical values, verified
+ * against the live API - so profile pages read from that one cached response
+ * instead of issuing a request per instructor. Falls back to the detail
+ * endpoint for anyone not currently featured.
+ */
+export async function getInstructorBySlug(idOrSlug) {
+  const instructors = await getFeaturedInstructors();
+  const found = instructors.find(
+    (i) => i.profile_slug === idOrSlug || i.id === idOrSlug,
+  );
+  if (found) return found;
+  return getInstructorProfile(idOrSlug);
+}
