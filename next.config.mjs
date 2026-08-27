@@ -16,6 +16,18 @@ const LEGACY_ORIGIN = 'https://haelsoft-market-place.pages.dev';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    // Course/product thumbnails and seller avatars are served from Cloudflare R2.
+    // Next 16 removed `images.domains`; remotePatterns is the supported form.
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'pub-b0ce30e9f3b44b83bd3008f0afa20b32.r2.dev',
+        pathname: '/media/**',
+      },
+    ],
+  },
+
   async rewrites() {
     return {
       fallback: [
