@@ -24,6 +24,9 @@ import CallToAction from '@/components/CallToAction';
 import TrustindexWidget from '@/components/TrustindexWidget';
 import SmartLink from '@/components/SmartLink';
 import { buildMetadata } from '@/lib/metadata';
+import JsonLd from '@/components/JsonLd';
+import { faqPage } from '@/lib/schema';
+import { faqs } from '@/lib/faqs';
 
 const TRUSTINDEX_GOOGLE_REVIEW_SRC = "https://cdn.trustindex.io/loader.js?bd8d47c71c64804eed162b7cb3f";
 const TRUSTINDEX_WIDGET_FEED_SRC = "https://cdn.trustindex.io/loader-feed.js?b88926e713d8804b4866c3ed4ec";
@@ -84,6 +87,7 @@ export default async function Home() {
 
   return (
     <section id="Home" className="max-w-full pt-6 sm:pt-8 md:pt-10 lg:pt-12 ">
+      <JsonLd data={faqPage(faqs)} />
       {/* Hero Section */}
       <div className="font-inter px-4 md:px-8">
 

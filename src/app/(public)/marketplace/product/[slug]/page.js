@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import SmartLink from '@/components/SmartLink';
 import { getProductBySlug, getMarketplaceProducts, ApiError } from '@/lib/api';
 import { buildMetadata } from '@/lib/metadata';
+import JsonLd from '@/components/JsonLd';
+import { productSchema, breadcrumbs } from '@/lib/schema';
 
 const TYPE_LABELS = {
   pdf: 'PDF Document', zip: 'ZIP Archive', figma: 'Figma File',
@@ -78,6 +80,12 @@ export default async function ProductDetail({ params }) {
 
   return (
     <div className="min-h-screen bg-[#FCFAFA] font-inter">
+      <JsonLd data={productSchema(product, slug)} />
+      <JsonLd data={breadcrumbs([
+        { name: 'Home', path: '/' },
+        { name: 'Marketplace', path: '/marketplace' },
+        { name: product.title, path: `/marketplace/product/${slug}` },
+      ])} />
       {/* Breadcrumb */}
       <div className="frame py-5">
         <div className="flex items-center gap-2 text-sm flex-wrap">

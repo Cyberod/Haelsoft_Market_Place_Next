@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import InstructorProfile from '@/components/InstructorProfile';
 import { getInstructorBySlug, getFeaturedInstructors, ApiError } from '@/lib/api';
 import { buildMetadata } from '@/lib/metadata';
+import JsonLd from '@/components/JsonLd';
+import { personSchema } from '@/lib/schema';
 
 export async function generateStaticParams() {
   try {
@@ -57,5 +59,10 @@ export function instructorMetadata(instructor, path) {
 export default async function InstructorPage({ params }) {
   const { slug } = await params;
   const instructor = await load(slug);
-  return <InstructorProfile instructor={instructor} />;
+  return (
+    <>
+      <JsonLd data={personSchema(instructor, slug)} />
+      <InstructorProfile instructor={instructor} />
+    </>
+  );
 }

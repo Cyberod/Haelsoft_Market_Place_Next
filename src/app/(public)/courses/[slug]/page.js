@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import CourseDetail from '@/components/CourseDetail';
 import { getPublicCourse, getCourseSlugs, ApiError } from '@/lib/api';
 import { buildMetadata } from '@/lib/metadata';
+import JsonLd from '@/components/JsonLd';
+import { courseSchema, breadcrumbs } from '@/lib/schema';
 
 export async function generateStaticParams() {
   try {
@@ -48,5 +50,15 @@ export async function generateMetadata({ params }) {
 export default async function CoursePage({ params }) {
   const { slug } = await params;
   const course = await load(slug);
-  return <CourseDetail course={course} slug={slug} />;
+  return (
+    <>
+      <JsonLd data={courseSchema(course, slug)} />
+      <JsonLd data={breadcrumbs([
+        { name: 'Home', path: '/' },
+        { name: 'Marketplace', path: '/marketplace' },
+        { name: course.title, path: `/courses/${slug}` },
+      ])} />
+      <CourseDetail course={course} slug={slug} />
+    </>
+  );
 }

@@ -71,9 +71,9 @@ export default function HowItWorksSection({ section }) {
                     />
                   </button>
 
-                  {/* Step Substeps */}
-                  {expandedStep === step.number && (
-                    <div className="pt-4">
+                  {/* Step Substeps — always in the DOM, hidden when collapsed,
+                      so the 36 substeps are visible to crawlers. */}
+                  <div className={`pt-4 ${expandedStep === step.number ? '' : 'hidden'}`}>
                       <ul className="space-y-3">
                         {step.substeps.map((substep, substepIndex) => (
                           <li
@@ -91,8 +91,7 @@ export default function HowItWorksSection({ section }) {
                           </li>
                         ))}
                       </ul>
-                    </div>
-                  )}
+                  </div>
                 </div>
               </div>
             ))}

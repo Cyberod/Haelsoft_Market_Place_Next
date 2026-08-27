@@ -4,6 +4,9 @@ import WhyUsCards from '@/components/WhyUsCards';
 import FAQs from '@/components/FAQs';
 import CallToAction from '@/components/CallToAction';
 import { buildMetadata } from '@/lib/metadata';
+import JsonLd from '@/components/JsonLd';
+import { faqPage } from '@/lib/schema';
+import { faqs } from '@/lib/faqs';
 
 export const metadata = buildMetadata({
   title: 'Pricing — Instructor & Affiliate Plans | Haelsoft Marketplace',
@@ -17,6 +20,7 @@ export const metadata = buildMetadata({
 export default function PricingPage() {
   return (
     <section id="Pricing" className="max-w-full pt-10">
+      <JsonLd data={faqPage(faqs)} />
       <div className="">
 
         {/* Hero Section */}

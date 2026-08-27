@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { SITE_NAME, SITE_URL } from "@/lib/metadata";
+import JsonLd from "@/components/JsonLd";
+import { organization, website } from "@/lib/schema";
 import "./globals.css";
 
 // Self-hosted by next/font — replaces the Google Fonts @import the Vite app used,
@@ -50,6 +52,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <body>
+        <JsonLd data={organization} />
+        <JsonLd data={website} />
         {children}
 
         {/* GA4, same measurement ID as the SPA so the property sees both apps
