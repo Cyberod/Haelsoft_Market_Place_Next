@@ -27,13 +27,23 @@ export const SITE_NAME = 'Haelsoft Marketplace';
  * @param {string} [o.image]       absolute image URL (R2 thumbnails already are)
  * @param {string} [o.type]        openGraph type; defaults to "website"
  * @param {boolean}[o.noindex]
+ * @param {boolean}[o.absoluteTitle] bypass the "%s | Haelsoft" template, for titles
+ *                                   that already carry the brand
  */
-export function buildMetadata({ title, description, path, image, type = 'website', noindex = false }) {
+export function buildMetadata({
+  title,
+  description,
+  path,
+  image,
+  type = 'website',
+  noindex = false,
+  absoluteTitle = false,
+}) {
   const url = `${SITE_URL}${path}`;
   const images = image ? [{ url: image }] : undefined;
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     openGraph: {
