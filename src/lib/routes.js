@@ -12,7 +12,7 @@
  */
 export const MIGRATED_ROUTES = [
   '/features',       // Step 3.1
-  // '/pricing',     // Step 3.2
+  '/pricing',        // Step 3.2
   // '/HowitWorks',  // Step 3.3
   // '/contact',     // Step 3.4
   // '/marketplace', // Step 4.1
