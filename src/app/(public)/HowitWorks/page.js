@@ -159,6 +159,7 @@ export default function HowitWorks() {
           <div className="text-center font-inter flex flex-col items-center frame">
             <div className="sm:px-5 lg:px-[100px] xl:px-[180px] 2xl:px-[260px] tracking-[0px] items-center text-center flex flex-col">
               <SectionHeader
+                as="h1"
                 badge="How Haelsoft Works"
                 title="Sell, Learn, and Grow with Haelsoft Marketplace"
                 description="Our platform makes it easy for educators to monetize their expertise and for learners to access high-quality courses, digital products, and services."

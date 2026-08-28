@@ -94,6 +94,7 @@ export default async function Home() {
         <div className="text-center font-inter flex flex-col items-center frame">
           <div className="sm:px-5 lg:px-[100px] xl:px-[180px] 2xl:px-[260px] tracking-[0px] items-center text-center flex flex-col">
             <SectionHeader
+            as="h1"
             badge="Empower. Inspire. Earn"
             title="Share your Knowledge, Impact lives, and build income doing what you love"
             description="Join a thriving marketplace where educators sell courses, 

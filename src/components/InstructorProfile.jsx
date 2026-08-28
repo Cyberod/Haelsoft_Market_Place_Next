@@ -27,7 +27,7 @@ export default function InstructorProfile({ instructor }) {
 
                 <div className="flex flex-col justify-center items-center text-center">
                     <p className="py-[10px] px-4 font-[18px] text-section-text bg-section-text-bg rounded-3xl mb-3.25">Instructor Profile</p>
-                    <p className="text-[32px] font-bold lg:leading-17.5 leading-10 ">{instructor.name}</p>
+                    <h1 className="text-[32px] font-bold lg:leading-17.5 leading-10 ">{instructor.name}</h1>
                    <p className="font-[16px] text-black xl:leading-8 xl:tracking-[0.5px]  max-w-2xl">{instructor.title}</p>
                 </div>
             </div>

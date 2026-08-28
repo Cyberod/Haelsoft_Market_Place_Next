@@ -18,7 +18,7 @@ export default function Contact() {
       {/* Hero Section */}
       <div className="sm:px-5 lg:px-[200px] xl:px-[350px]  2xl:px-[450px]  tracking-[0px] mb-10 lg:mb-20 ">
         <div className="w-full mx-auto px-4 py-8 flex flex-col justify-center items-center text-center frame">
-          <p className="text-[32px] sm:text-[33px] md:text-[38px] lg:text-[48px] font-bold lg:leading-17.5 leading-10 flex justify-center">Get in Touch with Haelsoft Market Place</p>
+          <h1 className="text-[32px] sm:text-[33px] md:text-[38px] lg:text-[48px] font-bold lg:leading-17.5 leading-10 flex justify-center">Get in Touch with Haelsoft Market Place</h1>
           <p className="font-[18px] md:font-[20px] text-inactive xl:leading-8 xl:tracking-[0.5px] mt-4  justify-center">We’d love to hear from you, whether you are a student,
             instructor or guest. Feel free to reach out to us, Our team is ready to help.</p>
         </div>

@@ -26,8 +26,8 @@ export default function PricingPage() {
         {/* Hero Section */}
         <div className="text-center  font-inter mb-20 frame">
           <div className=" px-4.5 sm:px-10 md:px-20 lg:px-25 xl:px-45 2xl:px-58.5">
-            <p className="font-bold text-[37px] sm:text-[45px] md:hidden">Flexible <br /> Pricing Plans for Every Educator &amp; Creator in Africa</p>
-            <p className="font-bold md:text-[50px] lg:text-[60px] hidden md:block md:px-15 lg:px-5 xl:px-15 2xl:px-25.5 leading-19.5">Flexible Pricing Plans for Every Educator &amp; Creator in Africa</p>
+            <h1 className="font-bold text-[37px] sm:text-[45px] md:hidden">Flexible <br /> Pricing Plans for Every Educator &amp; Creator in Africa</h1>
+            <h1 className="font-bold md:text-[50px] lg:text-[60px] hidden md:block md:px-15 lg:px-5 xl:px-15 2xl:px-25.5 leading-19.5">Flexible Pricing Plans for Every Educator &amp; Creator in Africa</h1>
 
             <p className="text-inactive text-center font-[16px] md:font-[20px] leading-8 tracking-[0.5px] mt-6">Sell courses, digital products, services, and subscriptions with a pricing model designed
               to support educators and entrepreneurs across all 54 African countries.</p>
