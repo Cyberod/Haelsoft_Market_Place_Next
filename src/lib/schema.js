@@ -60,6 +60,26 @@ export function faqPage(faqs) {
   };
 }
 
+/**
+ * schema.org's inLanguage expects a BCP-47 code, but the API stores display
+ * names ("English"). Map the ones we know, pass through anything that already
+ * looks like a code, and omit the rest rather than emit an invalid value.
+ */
+const LANGUAGE_CODES = {
+  english: 'en', french: 'fr', spanish: 'es', portuguese: 'pt', arabic: 'ar',
+  swahili: 'sw', hausa: 'ha', yoruba: 'yo', igbo: 'ig', german: 'de',
+  italian: 'it', chinese: 'zh', hindi: 'hi',
+};
+
+function bcp47(language) {
+  if (!language) return null;
+  const raw = String(language).trim();
+  const named = LANGUAGE_CODES[raw.toLowerCase()];
+  if (named) return named;
+  // Already a code — pass it through unchanged so region subtags keep their case.
+  return /^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$/i.test(raw) ? raw : null;
+}
+
 export function courseSchema(course, slug) {
   const price = Number(course.price) || 0;
   const rating = Number(course.average_rating) || 0;
@@ -76,7 +96,7 @@ export function courseSchema(course, slug) {
     ...(course.instructor_name && {
       instructor: { '@type': 'Person', name: course.instructor_name },
     }),
-    ...(course.language && { inLanguage: course.language }),
+    ...(bcp47(course.language) && { inLanguage: bcp47(course.language) }),
     offers: {
       '@type': 'Offer',
       price,

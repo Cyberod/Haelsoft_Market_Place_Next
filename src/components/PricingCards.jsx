@@ -10,7 +10,7 @@ const getPlans = (billingCycle) => [
     audience: 'Perfect for beginners who want to test the platform and start selling',
     icon: '/starter-icon.svg',
     features: [
-      { text: '0% Listing Fee – List unlimited courses &amp; products', included: true },
+      { text: '0% Listing Fee – List unlimited courses & products', included: true },
       { text: '20% Transaction Fee per sale', included: true },
       { text: 'Access to basic analytics', included: true },
       { text: 'Payouts via Bank Transfer, PayPal, Crypto, Mobile Money', included: true },
