@@ -30,14 +30,16 @@ export const REVALIDATE = {
 };
 
 const TIMEOUT_MS = 25_000;
-const ATTEMPTS = 3;
+const ATTEMPTS = 5;
 // Node's undici applies its own ~10s *connect* timeout that AbortSignal.timeout
 // does not override, so a sleeping Render dyno fails fast with
 // ConnectTimeoutError rather than using the full budget. Retrying immediately
 // just burns attempts inside the same wake-up window, so back off between them:
-// the attempts then span roughly 10 + 3 + 10 + 9 + 10 = 42s, which covers
-// Render's 30-50s cold start.
-const BACKOFF_MS = [0, 3_000, 9_000];
+// the attempts then span roughly 10 + 3 + 10 + 9 + 10 + 20 + 10 + 40 + 10 =
+// 122s, comfortably past Render's 30-50s cold start plus a second sleep.
+// Three attempts proved too few: a production build failed on a single course
+// when all three landed inside one sleep window.
+const BACKOFF_MS = [0, 3_000, 9_000, 20_000, 40_000];
 
 export class ApiError extends Error {
   constructor(message, status) {

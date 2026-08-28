@@ -16,6 +16,13 @@ const LEGACY_ORIGIN = 'https://haelsoft-market-place.pages.dev';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Next allows each page 60s to prerender (config-shared.js default), then
+  // abandons and retries the whole page. The API runs on a Render free dyno
+  // whose cold start is 30-50s, so src/lib/api.js retries with backoff across
+  // up to ~197s — which the 60s cap would cut off mid-retry, wasting the
+  // backoff and re-running the page from scratch. Raised so the two agree.
+  staticPageGenerationTimeout: 240,
+
   images: {
     // Course/product thumbnails and seller avatars are served from Cloudflare R2.
     // Next 16 removed `images.domains`; remotePatterns is the supported form.
