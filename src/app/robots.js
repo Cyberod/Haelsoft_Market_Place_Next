@@ -19,8 +19,6 @@ export default function robots() {
           '/onboarding/',
           '/checkout/',
           '/payment/',
-          // migration-only page; removed before cutover
-          '/theme-check',
         ],
       },
     ],
