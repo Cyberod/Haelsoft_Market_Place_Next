@@ -35,6 +35,28 @@ const nextConfig = {
     ],
   },
 
+  /**
+   * 16 course URLs were once submitted to Google under the singular "/course/"
+   * path. The sitemap stopped listing them in 3244944, but delisting does not
+   * remove what is already indexed — and the SPA has no /course/ route, so it
+   * answers them with its catch-all shell and Google sees a soft 404.
+   *
+   * A real 308 consolidates them onto the canonical /courses/:slug. Redirects
+   * are evaluated before the fallback rewrite below, so this wins over the
+   * proxy to the SPA. ":path+" requires at least one segment, leaving a bare
+   * "/course" to fall through rather than landing on the slugless /courses,
+   * which is a dead URL in both apps.
+   */
+  async redirects() {
+    return [
+      {
+        source: '/course/:path+',
+        destination: '/courses/:path+',
+        permanent: true,
+      },
+    ];
+  },
+
   async rewrites() {
     return {
       fallback: [
