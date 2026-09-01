@@ -32,7 +32,10 @@ export default async function sitemap() {
     { path: '/HowitWorks',  changeFrequency: 'monthly', priority: 0.6 },
     { path: '/contact',     changeFrequency: 'monthly', priority: 0.5 },
   ].map(({ path, changeFrequency, priority }) => ({
-    url: `${SITE_URL}${path}`,
+    // Next strips the root's trailing slash when it resolves alternates.canonical,
+    // so "/" must be emitted as the bare origin or the sitemap and the canonical
+    // disagree on the homepage's URL.
+    url: path === '/' ? SITE_URL : `${SITE_URL}${path}`,
     changeFrequency,
     priority,
   }));
