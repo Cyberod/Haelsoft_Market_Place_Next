@@ -197,7 +197,7 @@ export default function HowitWorks() {
           title="Start your Journey Today"
           description="Whether you are an educator, learner, or affiliate, Haelsoft EdTech provides everything you need to succeed."
           buttonText="Get started"
-          buttonLink=""
+          buttonLink="/signup"
         />
         </div>
 

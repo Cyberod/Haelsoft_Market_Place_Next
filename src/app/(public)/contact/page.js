@@ -55,7 +55,7 @@ export default function Contact() {
           title="Join the Community. Share the Knowledge. Earn as an Affiliate."
           description="Choose a pricing plan that works for you and start monetizing your knowledge across Africa."
           buttonText="Get started"
-          buttonLink=""
+          buttonLink="/signup"
         />
       </div>
 

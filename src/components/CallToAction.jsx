@@ -1,11 +1,5 @@
-import { isMigrated } from '@/lib/routes';
-import Link from 'next/link';
+import SmartLink from './SmartLink';
 
-/**
- * `buttonLink` is passed as "" by five of the six callers in the SPA, which
- * renders a link to the current page. That behaviour is preserved verbatim
- * here rather than silently repointed — see the note in the port commit.
- */
 function CallToAction({ title, description, buttonText, buttonLink }) {
   const buttonClass =
     'inline-block bg-linear-to-t from-haelsoft-primary from-36% to-haelsoft-secondary text-white font-semibold px-8 py-3 rounded-3xl hover:opacity-90 transition-opacity relative z-10';
@@ -22,11 +16,7 @@ function CallToAction({ title, description, buttonText, buttonLink }) {
         <p className="text-inactive text-lg md:text-xl leading-auto mb-[50px] relative z-10 flex justify-center">
           {description}
         </p>
-        {isMigrated(buttonLink) ? (
-          <Link href={buttonLink} className={buttonClass}>{buttonText}</Link>
-        ) : (
-          <a href={buttonLink} className={buttonClass}>{buttonText}</a>
-        )}
+        <SmartLink href={buttonLink} className={buttonClass}>{buttonText}</SmartLink>
       </div>
     </div>
   );

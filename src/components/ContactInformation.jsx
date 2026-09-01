@@ -1,3 +1,4 @@
+import { SOCIAL_LINKS } from '@/lib/social';
 export default function ContactInformation() {
   const contactItems = [
     {
@@ -23,12 +24,7 @@ export default function ContactInformation() {
     {
       title: "Follow Us",
       description: "Connect with us on social media",
-      info: [
-        { name: "Twitter", icon: "/twitter.svg" },
-        { name: "Facebook", icon: "/facebook.svg" },
-        { name: "Instagram", icon: "/instagram.svg" },
-        { name: "LinkedIn", icon: "/linkedin.svg" }
-      ]
+      info: SOCIAL_LINKS
     }
   ];
 
@@ -58,7 +54,9 @@ export default function ContactInformation() {
                   {item.info.map((social, idx) => (
                     <a
                       key={idx}
-                      href="#"
+                      href={social.url}
+                      target="_blank"
+                      rel="noreferrer"
                       className="transition-opacity hover:opacity-70"
                       title={social.name}
                     >

@@ -1,4 +1,5 @@
 import ActiveLink from './ActiveLink';
+import { SOCIAL_LINKS } from '@/lib/social';
 
 // Server component: the only interactive part is active-link styling, which is
 // isolated in <ActiveLink>. Everything else ships as plain HTML.
@@ -8,14 +9,6 @@ const NAV_LINK = {
   activeClassName: 'text-haelsoft-primary font-semibold',
   inactiveClassName: 'text-inactive hover:text-haelsoft-primary',
 };
-
-const SOCIALS = [
-  { href: 'https://x.com/Haelsoftedtech', src: '/twitter.svg', alt: 'Twitter' },
-  { href: 'https://web.facebook.com/profile.php?id=61590413063452', src: '/facebook.svg', alt: 'Facebook' },
-  { href: 'https://www.instagram.com/healsoftedtech/', src: '/instagram.svg', alt: 'Instagram' },
-  { href: 'https://www.linkedin.com/company/haelsoft/?viewAsMember=true', src: '/linkedin.svg', alt: 'LinkedIn' },
-  { href: 'https://www.tiktok.com/@haelsoft', src: '/tiktok.svg', alt: 'TikTok' },
-];
 
 const WEBSITE_LINKS = [
   { href: '/', label: 'Home', end: true },
@@ -36,9 +29,9 @@ export default function Footer() {
             Get answers to common questions about Haelsoft, how it works, and what to expect.
           </p>
           <div className="flex gap-6 mb-8">
-            {SOCIALS.map(({ href, src, alt }) => (
-              <a key={alt} href={href} target="_blank" rel="noreferrer" className="hover:opacity-80 transition-opacity">
-                <img src={src} alt={alt} className="w-8 h-8" />
+            {SOCIAL_LINKS.map(({ name, url, icon }) => (
+              <a key={name} href={url} target="_blank" rel="noreferrer" className="hover:opacity-80 transition-opacity">
+                <img src={icon} alt={name} className="w-8 h-8" />
               </a>
             ))}
           </div>
@@ -78,7 +71,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li><a href="#" className="text-inactive hover:text-haelsoft-primary transition-colors">Haelsoft Edtech</a></li>
               <li><a href="#" className="text-inactive hover:text-haelsoft-primary transition-colors">Integrations</a></li>
-              <li><a href="#" className="text-inactive hover:text-haelsoft-primary transition-colors">Pricing</a></li>
+              <li><ActiveLink href="/pricing" {...NAV_LINK}>Pricing</ActiveLink></li>
             </ul>
           </div>
         </div>

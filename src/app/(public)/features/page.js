@@ -50,7 +50,7 @@ export default function Features() {
           title="Start Selling and Teaching Today"
           description="Join thousands of educators and entrepreneurs building their businesses on Haelsoft EdTech."
           buttonText="Get started"
-          buttonLink=""
+          buttonLink="/signup"
         />
       </div>
 

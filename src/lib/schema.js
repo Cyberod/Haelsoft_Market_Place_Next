@@ -1,4 +1,5 @@
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from './metadata';
+import { SOCIAL_LINKS } from './social';
 
 const abs = (path) => `${SITE_URL}${path}`;
 
@@ -11,13 +12,7 @@ export const organization = {
   logo: abs('/HaelsoftLogo.svg'),
   description:
     "Haelsoft Marketplace is Nigeria's premier platform to buy and sell digital products, online courses, and creative assets.",
-  sameAs: [
-    'https://x.com/Haelsoftedtech',
-    'https://web.facebook.com/profile.php?id=61590413063452',
-    'https://www.instagram.com/healsoftedtech/',
-    'https://www.linkedin.com/company/haelsoft/',
-    'https://www.tiktok.com/@haelsoft',
-  ],
+  sameAs: SOCIAL_LINKS.map((s) => s.url),
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'customer support',

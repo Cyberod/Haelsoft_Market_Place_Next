@@ -68,7 +68,7 @@ export default function PricingPage() {
             title="Start Selling Today!"
             description="Choose a pricing plan that works for you and start monetizing your knowledge across Africa."
             buttonText="Get started"
-            buttonLink=""
+            buttonLink="/signup"
           />
         </div>
 
