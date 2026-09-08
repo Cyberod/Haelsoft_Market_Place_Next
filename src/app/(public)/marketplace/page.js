@@ -6,9 +6,9 @@ import { getPublicCourses, getMarketplaceProducts } from '@/lib/api';
 import { buildMetadata } from '@/lib/metadata';
 
 export const metadata = buildMetadata({
-  title: 'Marketplace — Courses, Digital Products & Creative Assets | Haelsoft',
+  title: 'Digital Products, Courses & Services | Haelsoft Marketplace',
   description:
-    'Browse and buy premium courses and digital products on Haelsoft Marketplace — online courses, eBooks, templates, Figma files, PDFs, and more.',
+    'Explore courses, e-books, templates, digital products and services from African creators and experts. Discover and buy digital products on Haelsoft Marketplace.',
   // Canonical stays on the bare path so filtered views consolidate into it
   // rather than competing as near-duplicates.
   path: '/marketplace',

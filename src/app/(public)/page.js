@@ -32,9 +32,9 @@ const TRUSTINDEX_GOOGLE_REVIEW_SRC = "https://cdn.trustindex.io/loader.js?bd8d47
 const TRUSTINDEX_WIDGET_FEED_SRC = "https://cdn.trustindex.io/loader-feed.js?b88926e713d8804b4866c3ed4ec";
 
 export const metadata = buildMetadata({
-  title: 'Haelsoft Marketplace — Buy & Sell Tech, Business & Creative Digital Products',
+  title: 'Sell Digital Products & Courses Online in Africa | Haelsoft',
   description:
-    "Haelsoft Marketplace is Nigeria's premier platform to buy and sell digital products, online courses, and creative assets in Tech, Business, Health, and more.",
+    'Turn your knowledge into income. Sell courses, e-books, templates, services and digital products to customers across Africa with Haelsoft Marketplace.',
   path: '/',
   absoluteTitle: true,
 });
